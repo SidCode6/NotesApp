@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple, minimalist notes app with dark mode support">
+    <title>Simple Notes App</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar / Left Panel -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-title">Notes</h1>
+                <button id="sidebarToggle" aria-label="Toggle sidebar" title="Toggle sidebar">☰</button>
+            </div>
+            <div class="panel-header">
+                <div class="search-container">
+                    <button id="searchToggle" aria-label="Toggle search" title="Toggle search">🔍</button>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search notes..."
+                        class="collapsed"
+                        aria-label="Search notes"
+                    >
+                </div>
+            </div>
+            <div id="notesList" class="notes-stack">
+                <div id="loadingState" class="loading-state">Loading notes...</div>
+                <div id="emptyState" class="empty-state" hidden>No notes found</div>
+            </div>
+        </div>
+
+        <!-- Main Content / Right Panel -->
+        <div class="main-content">
+            <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌓</button>
+            <div class="editor-container">
+                <div class="formatting-toolbar">
+                    <button id="boldBtn" aria-label="Bold">B</button>
+                    <button id="italicBtn" aria-label="Italic">I</button>
+                    <button id="underlineBtn" aria-label="Underline">U</button>
+                    <button id="codeBlockBtn" aria-label="Code Block">&lt;/&gt;</button>
+                </div>
+                <textarea
+                    id="noteInput"
+                    placeholder="Start typing..."
+                    aria-label="Note content"
+                    spellcheck="true"
+                ></textarea>
+                <div id="wordCount" class="word-count">
+                    Words: 0 | Characters: 0
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button id="saveBtn" aria-label="Save note">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorToast" class="toast" role="alert" aria-live="polite"></div>
+    <script type="module" src="./app.ts"></script>
+</body>
+</html>
