@@ -1,9 +1,3 @@
-import Prism from 'prismjs';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-markup';
-
 // Types
 interface Note {
   id?: number;
@@ -33,7 +27,6 @@ const wordCount = getElement<HTMLDivElement>('wordCount');
 const boldBtn = getElement<HTMLButtonElement>('boldBtn');
 const italicBtn = getElement<HTMLButtonElement>('italicBtn');
 const underlineBtn = getElement<HTMLButtonElement>('underlineBtn');
-const codeBlockBtn = getElement<HTMLButtonElement>('codeBlockBtn');
 
 // Database Management
 class NotesDB {
@@ -260,19 +253,6 @@ function applyFormat(format: string): void {
         selectionOffset = 3;
       }
       break;
-    case 'code':
-      if (selectedText.startsWith('<pre><code>') && selectedText.endsWith('</code></pre>')) {
-        newText = selectedText.slice(11, -13);
-        selectionOffset = -11;
-      } else {
-        newText = `<pre><code>${selectedText}</code></pre>`;
-        selectionOffset = 11;
-        // Highlight code after inserting
-        setTimeout(() => {
-          Prism.highlightElement(noteInput);
-        }, 0);
-      }
-      break;
   }
 
   noteInput.setRangeText(newText, start, end, 'select');
@@ -386,7 +366,6 @@ function setupEventListeners(): void {
   boldBtn.addEventListener('click', () => applyFormat('bold'));
   italicBtn.addEventListener('click', () => applyFormat('italic'));
   underlineBtn.addEventListener('click', () => applyFormat('underline'));
-  codeBlockBtn.addEventListener('click', () => applyFormat('code'));
 
   // Text Editor
   noteInput.addEventListener('keydown', (e) => {
